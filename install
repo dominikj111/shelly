@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# This script runs the Deno install script with home-relative permissions
+# Usage: ./install
+
+# Check if Deno is installed in current environment
+if ! command -v deno &>/dev/null; then
+    echo "Deno is not installed. Please install it first."
+    exit 1
+fi
+
+deno run \
+  --allow-env \
+  --allow-read="$(pwd)/scripts,$(pwd)/assets,$HOME/cli" \
+  --allow-write="$HOME/cli" \
+  ./install.ts
